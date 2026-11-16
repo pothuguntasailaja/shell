@@ -8,10 +8,20 @@ if [ $USER_ID -ne 0 ]; then
 fi   
 
 
-dnf install nginx -y
+dnf install nginx -y 
 
 if [ $? -ne 0 ]; then
     echo "NGINX is not INSTALLED....."
 else
     echo "NGINX is INSTALLED....." 
+fi    
+
+
+
+dnf install mysql -y 
+
+if [ $? -ne 0 ]; then
+    echo "mysql is not INSTALLED....."
+else
+    echo "mysql is INSTALLED....." 
 fi    
