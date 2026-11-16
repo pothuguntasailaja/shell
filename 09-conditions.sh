@@ -1,11 +1,9 @@
 #!/bin/bash
 
-number1=$1
+age=$1
 
-if [ $number1 > 50 ]; then
-    echo "eligible for pension"
-elif [ $number1 >= 25 and $number >= 49 ]; then
-        echo "eligible for job"
+if [ $age > 10 ]; then
+   echo " they are teenagers"
 else
     echo "they are kids"
-fi            
+fi       
