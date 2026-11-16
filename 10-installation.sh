@@ -7,7 +7,7 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-mkdir -p LOG_FOLDER
+mkdir -p $LOG_FOLDER
 
 LOG_FOLDER="/var/log/shell"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
