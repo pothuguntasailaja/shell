@@ -2,26 +2,48 @@
 
 
 USER_ID=$(id -u) 
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
+
+
 
 if [ $USER_ID -ne 0 ]; then
    echo "run with root privileges"
 fi   
 
 
-dnf install nginx -y 
-
-if [ $? -ne 0 ]; then
-    echo "NGINX is not INSTALLED....."
+VALIDATE (){
+if [ $1 -ne 0 ]; then
+    echo -e "$2 is $R FAILURE...... $N"
 else
-    echo "NGINX is INSTALLED....." 
+    echo -e "$2 is  $G SUCCESS..... $N" 
 fi    
+}
 
 
-
-dnf install mysql -y 
-
-if [ $? -ne 0 ]; then
-    echo "mysql is not INSTALLED....."
+dnf list installed nginx
+if  [ $? -ne 0 ]; then
+   dnf install nginx -y
+   VALIDATE $? "NGINX" 
 else
-    echo "mysql is INSTALLED....." 
-fi    
+    echo -e "already installed $Y SKIPPING.... $N"   
+fi   
+
+dnf list installed mysql
+if [ $? -ne 0 ]; then
+   dnf install mysql -y 
+   VALIDATE $? "MYSQL"
+else
+   echo -e "already installed $Y SKIPPING.... $N"   
+fi
+
+
+dnf list installed python3
+if [ $? -ne 0 ]; then
+   dnf install python3 -y 
+   VALIDATE $? "PYTHON3" 
+else    
+    echo -e "already installed $Y SKIPPING.... $N"   
+fi
