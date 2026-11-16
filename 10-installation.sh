@@ -7,14 +7,16 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-mkdir -p $LOG_FOLDER
 
 LOG_FOLDER="/var/log/shell"
 SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-LOG_FILE=$LOG_FOLDER/$SCRIPT_NAME
+LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
+mkdir -p $LOG_FOLDER
 
 if [ $USER_ID -ne 0 ]; then
    echo "run with root privileges"
+   else
+      echo "running with root privileges"
 fi   
 
 
