@@ -2,4 +2,6 @@
 
 
 for package in $@
-echo "print $package"
+do
+  echo "print $package"
+done  
