@@ -32,28 +32,11 @@ fi
 for package in $@
 do
   echo "print $package"
-dnf list installed nginx &>>$LOG_FILE
+dnf list installed $package &>>$LOG_FILE
 if  [ $? -ne 0 ]; then
-   dnf install nginx -y &>>$LOG_FILE
-   VALIDATE $? "NGINX" 
+   dnf install $package -y &>>$LOG_FILE
+   VALIDATE $? "$package" 
 else
-    echo -e "NGINX already installed $Y SKIPPING.... $N"   
+    echo -e "$package already installed $Y SKIPPING.... $N"   
 fi   
-
-dnf list installed mysql &>>$LOG_FILE
-if [ $? -ne 0 ]; then
-   dnf install mysql -y  &>>$LOG_FILE
-   VALIDATE $? "MYSQL"
-else
-   echo -e " MYSQL already installed $Y SKIPPING.... $N"   
-fi
-
-
-dnf list installed python3 &>>$LOG_FILE
-if [ $? -ne 0 ]; then
-   dnf install python3 -y  &>>$LOG_FILE
-   VALIDATE $? "PYTHON3" 
-else    
-    echo -e "PYTHON already installed $Y SKIPPING.... $N"   
-fi
 done
