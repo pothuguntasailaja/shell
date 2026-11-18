@@ -42,7 +42,6 @@ VALIDATE $? "INSTALL NODEJS"
 
 id roboshop
 if [ $? -ne 0 ]; then
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
 VALIDATE $? "Creating System User"
 else
     echo -e "roboshop user already exists.... $Y SKIPPING $N"
@@ -57,6 +56,9 @@ VALIDATE $? "DOWNLOADING THE CODE"
 
 cd /app   &>>$LOG_FILE
 VALIDATE $? "CHANGE APP DIR"
+
+rm -rf /app/* &>>$LOG_FILE
+VALIDATE $? "Removing Old Application Content"
 
 unzip /tmp/catalogue.zip  &>>$LOG_FILE
 VALIDATE $? "DOWNLOADING THE CODE IN TEMP DIR"
