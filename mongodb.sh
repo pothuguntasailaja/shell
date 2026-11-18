@@ -33,7 +33,7 @@ cp mongo.repo  /etc/yum.repos.d/mongo.repo
 VALIDATE $? "adding the repos"
 
 
-dnf install mongodb-org -y 
+dnf install mongodb-org -y  &>>$LOG_FILE
 VALIDATE $? "INSTALL MONGODB"
 
 systemctl enable mongod
@@ -43,7 +43,7 @@ systemctl start mongod
 VALIDATE $? "START MONGODB"
 
 sed -i  's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-VALIDATE $? "Allowing Remote Connections to Mongodb'
+VALIDATE $? "Allowing Remote Connections to Mongodb"
 
 systemctl restart mongod
 VALIDATE $? 'Restart Mongodb'
