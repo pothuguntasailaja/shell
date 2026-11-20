@@ -22,7 +22,7 @@ if [ ! -d $SOURCE_DIR ]; then
 fi
 
 
-files_to_delete=$(find / -name "*.log" -type f)
+files_to_delete=$(find . -name "*.log" -type f)
 
 
 
