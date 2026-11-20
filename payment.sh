@@ -34,10 +34,16 @@ dnf install python3 gcc python3-devel -y  &>>$LOG_FILE
 VALIDATE $? "INSTALL PYTHON3"
 
 
-useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop   &>>$LOG_FILE
-VALIDATE $? "CREATE SYSTEM USER"
+id roboshop &>>$LOG_FILE
 
-mkdir /app   &>>$LOG_FILE
+if [ $? -ne 0 ]; then
+    useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop   &>>$LOG_FILE
+   VALIDATE $? "CREATE SYSTEM USER"
+else
+    echo -e "roboshop user already exists.... $Y SKIPPING $N"
+fi
+
+mkdir -p  /app   &>>$LOG_FILE
 VALIDATE $? "CREATE APP DIR"
 
 curl -L -o /tmp/payment.zip https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip    &>>$LOG_FILE
