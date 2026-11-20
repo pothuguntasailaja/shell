@@ -52,6 +52,9 @@ VALIDATE $? "DOWNLOAD THE CODE"
 cd /app 
 VALIDATE $? "CHANGE APP DIR"
 
+rm -rf /app/* &>>$LOG_FILE
+VALIDATE $? "REMOVE THE OLD CODE"
+
 unzip /tmp/payment.zip   &>>$LOG_FILE
 VALIDATE $? "DOWNLOAD THE CODE IN TEMP DIR"
 
