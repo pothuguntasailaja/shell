@@ -42,9 +42,12 @@ VALIDATE $? "DISABLE NODEJS:20"
 dnf install nodejs -y  &>>$LOG_FILE
 VALIDATE $? "INSTALL NODEJS"
 
+
 id roboshop &>>$LOG_FILE
+
 if [ $? -ne 0 ]; then
-VALIDATE $? "Creating System User"
+    useradd --system --home /app --shell /sbin/nologin roboshop
+    VALIDATE $? "CREATING SYSTEM USER"
 else
     echo -e "roboshop user already exists.... $Y SKIPPING $N"
 fi
