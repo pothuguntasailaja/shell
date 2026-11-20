@@ -13,6 +13,7 @@ SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
 LOG_FILE="$LOG_FOLDER/$SCRIPT_NAME.log"
 mkdir -p $LOG_FOLDER
 SCRIPT_DIR=$PWD
+MYSQL_HOST=mysql.daws86s.de
 
 
 if [ $USER_ID -ne 0 ]; then
@@ -83,11 +84,11 @@ dnf install mysql -y  &>>$LOG_FILE
 VALIDATE $? "INSTALL MYSQL"
 
 
-mysql -h mysql.daws86s.de -uroot -pRoboshop@! -e  'use mysql' &>>$LOG_FILE
+mysql -h $MYSQL_HOST -uroot -pRoboshop@! -e  'use mysql' &>>$LOG_FILE
 if [ $? -ne 0 ]; then
-    mysql -h mysql.daws86s.de -uroot -pRoboshop@! < /app/db/schema.sql &>>$LOG_FILE
-    mysql -h mysql.daws86s.de -uroot -pRoboshop@! < /app/db/app-user.sql  &>>$LOG_FILE
-    mysql -h mysql.daws86s.de -uroot -pRoboshop@! < /app/db/master-data.sql &>>$LOG_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboshop@! < /app/db/schema.sql &>>$LOG_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboshop@! < /app/db/app-user.sql  &>>$LOG_FILE
+    mysql -h $MYSQL_HOST -uroot -pRoboshop@! < /app/db/master-data.sql &>>$LOG_FILE
 else
     echo -e "Shipping DB already exists.... $Y SKIPPING $N"
 fi
