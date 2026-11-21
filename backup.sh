@@ -17,12 +17,12 @@ DEST_DIR=$2
 
 
 
-if [ $USER_ID -ne 0 ]; then
-   echo "run with root privileges"
-   exit 1
-else
-      echo "running with root privileges"
-fi   
+# if [ $USER_ID -ne 0 ]; then
+#    echo "run with root privileges"
+#    exit 1
+# else
+#       echo "running with root privileges"
+# fi   
 
 USAGE(){
     echo  -e "$R USAGE:: sudo sh backup.sh <SOURCE_DIR> <DEST_DIR> $N"
