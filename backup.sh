@@ -17,12 +17,12 @@ DEST_DIR=$2
 
 
 
-# if [ $USER_ID -ne 0 ]; then
-#    echo "run with root privileges"
-#    exit 1
-# else
-#       echo "running with root privileges"
-# fi   
+if [ $USER_ID -ne 0 ]; then
+   echo "run with root privileges"
+   exit 1
+else
+      echo "running with root privileges"
+fi   
 
 USAGE(){
     echo  -e "$R USAGE:: sudo sh backup.sh <SOURCE_DIR> <DEST_DIR> $N"
@@ -47,3 +47,13 @@ if [ ! -d $DEST_DIR ]; then
    fi
 
 
+FILES=$(find $SOURCE_DIR -name "*.log" -type f)
+
+if [ ! -z "${FILES}" ]; then
+   echo "Files found: $FILES"
+   ZIP_FILE_NAME="$DEST_DIR/app-logs.zip"
+   echo "zip file name: $ZIP_FILE_NAME"
+   echo $FILES | zip -@ -j "$ZIP_FILE_NAME"
+else
+    echo -e "no files to archieve $Y SKIPPING...  $N"
+fi    
