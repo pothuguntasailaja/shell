@@ -53,7 +53,7 @@ if [ ! -z "${FILES}" ]; then
    echo "Files found: $FILES"
    ZIP_FILE_NAME="$DEST_DIR/app-logs.zip"
    echo "zip file name: $ZIP_FILE_NAME"
-   echo $FILES | zip -@ -j "$ZIP_FILE_NAME"
+   echo find $SOURCE_DIR -name "*.log" -type f | zip -@ -j "$ZIP_FILE_NAME"
 else
     echo -e "no files to archieve $Y SKIPPING...  $N"
 fi    
